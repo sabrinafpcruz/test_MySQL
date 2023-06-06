@@ -1,0 +1,254 @@
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 19
+Server version: 8.0.33 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+6 rows in set (0.04 sec)
+
+mysql> create database Aula01
+    -> ^C
+mysql> create database Aula01;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| aula01             |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use aula01;
+Database changed
+mysql> show tables;
+Empty set (0.01 sec)
+
+mysql> create database curso;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> use curso;
+Database changed
+mysql> create table alunos(
+    -> codigo int NOT NULL AUTO_INCREMENT,
+    -> nome varchar(20) not null,
+    -> telefone(8) not null,
+    -> primary key(codigo)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(8) not null,
+primary key(codigo)
+)' at line 4
+mysql> ^C
+mysql> ^C
+mysql>  create table alunos(
+    -> codigo int NOT NULL AUTO_INCREMENT,;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> create table alunos(
+    -> matricula int NOT NULL AUTO_INCREMENT,
+    -> nome VARCHAR(20) NOT NULL,
+    -> telefone CHAR(8) NOT NULL,
+    -> PRIMARY KEY(matricula)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
++-----------------+
+| Tables_in_curso |
++-----------------+
+| alunos          |
++-----------------+
+1 row in set (0.01 sec)
+
+mysql> desc alunos;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| matricula | int         | NO   | PRI | NULL    | auto_increment |
+| nome      | varchar(20) | NO   |     | NULL    |                |
+| telefone  | char(8)     | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+3 rows in set (0.02 sec)
+
+mysql> create database empresa;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| aula01             |
+| curso              |
+| empresa            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+9 rows in set (0.02 sec)
+
+mysql> use empresa;
+Database changed
+mysql> create table funcionarios;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql> create table funcionarios(
+    -> id_funcionario int NOT NULL AUTO_INCREMENT,
+    -> nome VARCHAR(20) NOT NULL,
+    -> CPF CHAR(11) NOT NULL,
+    -> departamento int NOT NULL,
+    -> CPF_supervisor CHAR(11) NOT NULL,
+    -> salario double NOT NULL,
+    -> PRIMARY KEY(id_funcionario)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_empresa |
++-------------------+
+| funcionarios      |
++-------------------+
+1 row in set (0.01 sec)
+
+mysql> desc funcionarios;
++----------------+-------------+------+-----+---------+----------------+
+| Field          | Type        | Null | Key | Default | Extra          |
++----------------+-------------+------+-----+---------+----------------+
+| id_funcionario | int         | NO   | PRI | NULL    | auto_increment |
+| nome           | varchar(20) | NO   |     | NULL    |                |
+| CPF            | char(11)    | NO   |     | NULL    |                |
+| departamento   | int         | NO   |     | NULL    |                |
+| CPF_supervisor | char(11)    | NO   |     | NULL    |                |
+| salario        | double      | NO   |     | NULL    |                |
++----------------+-------------+------+-----+---------+----------------+
+6 rows in set (0.01 sec)
+
+mysql> ^C
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| aula01             |
+| curso              |
+| empresa            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+9 rows in set (0.08 sec)
+
+mysql> use curso;
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_curso |
++-----------------+
+| alunos          |
++-----------------+
+1 row in set (0.02 sec)
+
+mysql> use alunos;
+ERROR 1049 (42000): Unknown database 'alunos'
+mysql> desc alunos;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| matricula | int         | NO   | PRI | NULL    | auto_increment |
+| nome      | varchar(20) | NO   |     | NULL    |                |
+| telefone  | char(8)     | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+3 rows in set (0.04 sec)
+
+mysql> inset into alunos (nome,telefone)
+    -> values('sabrina','85578213');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'inset into alunos (nome,telefone)
+values('sabrina','85578213')' at line 1
+mysql> insert into alunos (nome,telefone)
+    -> values('Sabrina','85578213')
+    -> ;
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from alunos;
++-----------+---------+----------+
+| matricula | nome    | telefone |
++-----------+---------+----------+
+|         1 | Sabrina | 85578213 |
++-----------+---------+----------+
+1 row in set (0.01 sec)
+
+mysql> insert into alunos (nome, telefone)
+    -> values('Clara','96784977');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into alunos (nome, telefone)
+    -> values ('Inaja','40028922');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into alunos(nome,telefone)
+    -> values ('Marcus','30902789')
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from alunos;
++-----------+---------+----------+
+| matricula | nome    | telefone |
++-----------+---------+----------+
+|         1 | Sabrina | 85578213 |
+|         2 | Clara   | 96784977 |
+|         3 | Inaja   | 40028922 |
+|         4 | Marcus  | 30902789 |
++-----------+---------+----------+
+4 rows in set (0.00 sec)
+
+mysql> insert into alunos(nome,telefone)
+    -> values('Debora','86784933');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from alunos;
++-----------+---------+----------+
+| matricula | nome    | telefone |
++-----------+---------+----------+
+|         1 | Sabrina | 85578213 |
+|         2 | Clara   | 96784977 |
+|         3 | Inaja   | 40028922 |
+|         4 | Marcus  | 30902789 |
+|         5 | Debora  | 86784933 |
++-----------+---------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from alunos where matricula=3;
++-----------+-------+----------+
+| matricula | nome  | telefone |
++-----------+-------+----------+
+|         3 | Inaja | 40028922 |
++-----------+-------+----------+
+1 row in set (0.00 sec)
