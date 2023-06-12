@@ -233,6 +233,8 @@ mysql> insert into alunos(nome,telefone)
     -> values('Debora','86784933');
 Query OK, 1 row affected (0.01 sec)
 
+
+
 mysql> select * from alunos;
 +-----------+---------+----------+
 | matricula | nome    | telefone |
@@ -252,3 +254,226 @@ mysql> select * from alunos where matricula=3;
 |         3 | Inaja | 40028922 |
 +-----------+-------+----------+
 1 row in set (0.00 sec)
+
+mysql> update funcionarios
+    -> set salario=salario*1.2
+    -> where salario>3000;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from funcionarios;
++----------------+------------+-------------+--------------+----------------+---------+
+| id_funcionario | nome       | CPF         | departamento | CPF_supervisor | salario |
++----------------+------------+-------------+--------------+----------------+---------+
+|              1 | Maria Jose | 71280534894 |            1 | 01980584895    |    1500 |
+|              2 | Carlos     | 51884536804 |           10 | 01980584895    |    2750 |
+|              3 | Samuel     | 28240634856 |            3 | 01980584895    |     750 |
+|              4 | Luiz       | 71554536568 |           10 | 01980584895    |   10296 |
+|              5 | Marcelo    | 91658532553 |            3 | 79980598805    |    1800 |
++----------------+------------+-------------+--------------+----------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> update funcionarios
+    -> set salario=7500
+    -> where id_funcionario=4
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update funcionarios
+    -> set salario=salario*1.2
+    -> where salario<3000;
+Query OK, 4 rows affected (0.02 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> select * from funcionarios;
++----------------+------------+-------------+--------------+----------------+---------+
+| id_funcionario | nome       | CPF         | departamento | CPF_supervisor | salario |
++----------------+------------+-------------+--------------+----------------+---------+
+|              1 | Maria Jose | 71280534894 |            1 | 01980584895    |    1800 |
+|              2 | Carlos     | 51884536804 |           10 | 01980584895    |    3300 |
+|              3 | Samuel     | 28240634856 |            3 | 01980584895    |     900 |
+|              4 | Luiz       | 71554536568 |           10 | 01980584895    |    7500 |
+|              5 | Marcelo    | 91658532553 |            3 | 79980598805    |    2160 |
++----------------+------------+-------------+--------------+----------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select nome,CPF from funcionarios;
++------------+-------------+
+| nome       | CPF         |
++------------+-------------+
+| Maria Jose | 71280534894 |
+| Carlos     | 51884536804 |
+| Samuel     | 28240634856 |
+| Luiz       | 71554536568 |
+| Marcelo    | 91658532553 |
++------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select nome,CPF from funcionarios where CPF=7;
+Empty set (0.01 sec)
+
+mysql> select nome,CPF from funcionarios;
++------------+-------------+
+| nome       | CPF         |
++------------+-------------+
+| Maria Jose | 71280534894 |
+| Carlos     | 51884536804 |
+| Samuel     | 28240634856 |
+| Luiz       | 71554536568 |
+| Marcelo    | 91658532553 |
++------------+-------------+
+5 rows in set (0.01 sec)
+
+mysql> select nome,CPF from funcionarios where salario<3000;
++------------+-------------+
+| nome       | CPF         |
++------------+-------------+
+| Maria Jose | 71280534894 |
+| Samuel     | 28240634856 |
+| Marcelo    | 91658532553 |
++------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> select count(*) from funcionarios;
++----------+
+| count(*) |
++----------+
+|        5 |
++----------+
+1 row in set (0.05 sec)
+
+mysql> select count(*) from funcionarios where departamento=10;
++----------+
+| count(*) |
++----------+
+|        2 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select count(*) from funcionarios where departamento=2 and salario>1000;
++----------+
+| count(*) |
++----------+
+|        0 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select count(*) from funcionarios where departamento=3 and salario>1000;
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select nome,departamento from funcionarios where salario between 1000 and 2000;
++------------+--------------+
+| nome       | departamento |
++------------+--------------+
+| Maria Jose |            1 |
++------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> select nome,departamento from funcionarios where salario between 500 and 2000;
++------------+--------------+
+| nome       | departamento |
++------------+--------------+
+| Maria Jose |            1 |
+| Samuel     |            3 |
++------------+--------------+
+2 rows in set (0.00 sec)
+
+mysql> select nome,departamento from funcionarios where id_funcionario in (2,4);
++--------+--------------+
+| nome   | departamento |
++--------+--------------+
+| Carlos |           10 |
+| Luiz   |           10 |
++--------+--------------+
+2 rows in set (0.04 sec)
+
+mysql> select * from funcionarios;
++----------------+------------+-------------+--------------+----------------+---------+
+| id_funcionario | nome       | CPF         | departamento | CPF_supervisor | salario |
++----------------+------------+-------------+--------------+----------------+---------+
+|              1 | Maria Jose | 71280534894 |            1 | 01980584895    |    1800 |
+|              2 | Carlos     | 51884536804 |           10 | 01980584895    |    3300 |
+|              3 | Samuel     | 28240634856 |            3 | 01980584895    |     900 |
+|              4 | Luiz       | 71554536568 |           10 | 01980584895    |    7500 |
+|              5 | Marcelo    | 91658532553 |            3 | 79980598805    |    2160 |
++----------------+------------+-------------+--------------+----------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select nome, CPF from funcionarios where CPF like '7%';
++------------+-------------+
+| nome       | CPF         |
++------------+-------------+
+| Maria Jose | 71280534894 |
+| Luiz       | 71554536568 |
++------------+-------------+
+2 rows in set (0.01 sec)
+
+mysql> select nome, CPF from funcionarios where CPF like 'ms%';
+Empty set (0.01 sec)
+
+mysql> select nome, CPF from funcionarios where CPF like '%5';
+Empty set (0.00 sec)
+
+mysql> create table alunos2(
+    -> matriculo int not null auto_increment,
+    -> nome varchar(40) not null,
+    -> primary key(matricula));
+ERROR 1072 (42000): Key column 'matricula' doesn't exist in table
+mysql> create table alunos2(
+    -> matricula int not null auto_increment,
+    -> nome varchar(40) not null,
+    -> primary key(matricula));
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> show tables;
++-------------------------+
+| Tables_in_empresaturmaa |
++-------------------------+
+| alunos2                 |
+| funcionarios            |
++-------------------------+
+2 rows in set (0.03 sec)
+
+mysql> insert into alunos2 (nome)
+    -> values('Marcus');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> delete matricula=1 from alunos2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=1 from alunos2' at line 1
+mysql> drop table alunos2;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from funcionarios;
++----------------+------------+-------------+--------------+----------------+---------+
+| id_funcionario | nome       | CPF         | departamento | CPF_supervisor | salario |
++----------------+------------+-------------+--------------+----------------+---------+
+|              1 | Maria Jose | 71280534894 |            1 | 01980584895    |    1800 |
+|              2 | Carlos     | 51884536804 |           10 | 01980584895    |    3300 |
+|              3 | Samuel     | 28240634856 |            3 | 01980584895    |     900 |
+|              4 | Luiz       | 71554536568 |           10 | 01980584895    |    7500 |
+|              5 | Marcelo    | 91658532553 |            3 | 79980598805    |    2160 |
++----------------+------------+-------------+--------------+----------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> desc funcionarios;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| id_funcionario | int          | NO   | PRI | NULL    | auto_increment |
+| nome           | varchar(100) | NO   |     | NULL    |                |
+| CPF            | char(11)     | NO   |     | NULL    |                |
+| departamento   | int          | NO   |     | NULL    |                |
+| CPF_supervisor | char(11)     | NO   |     | NULL    |                |
+| salario        | float        | NO   |     | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.04 sec)
+
+mysql> alter table funcionarios modify nome varchar(110) not null;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
